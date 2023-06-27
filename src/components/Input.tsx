@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { Reducer, useReducer, useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
+import { useSelector } from "react-redux";
+import { reduxStoreType } from "../redux/sliceTypes";
+import store, { addTodo } from "../redux/store";
+import { combineReducers } from "redux";
 
 const InsertInput = styled.input`
   width: 100%;
@@ -19,7 +23,7 @@ const InsertInput = styled.input`
 `;
 
 export const Input: React.FC = () => {
-  const [label, setLabel] = useState("");
+  const [label, setLabel] = useState<string>("");
 
   return (
     <TaskContainer>
@@ -33,6 +37,7 @@ export const Input: React.FC = () => {
         }}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
+            store.dispatch(addTodo(label));
             setLabel("");
           }
         }}
