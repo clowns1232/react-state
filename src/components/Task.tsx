@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
 import { TaskType } from "../redux/sliceTypes";
+import store, { checkTodo } from "../redux/store";
 
 export const TextStyle = css`
   font-size: 17px;
@@ -70,6 +71,7 @@ export const Task: React.FC<TaskType> = ({ id, complete, label }) => {
     <Container
       onClick={() => {
         // Toggle completed
+        store.dispatch(checkTodo(id));
       }}
     >
       <Check checked={complete}>

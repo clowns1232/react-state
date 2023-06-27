@@ -22,6 +22,10 @@ const tasksSlice = createSlice({
         return { payload: { id, label, complete: false } };
       },
     },
+    checkTodo: (state, action) => {
+      const checkItem = state.filter((task) => task.id === action.payload);
+      checkItem[0].complete = !checkItem[0].complete;
+    },
   },
 });
 
@@ -31,4 +35,4 @@ export default configureStore({
   },
 });
 
-export const { addTodo } = tasksSlice.actions;
+export const { addTodo, checkTodo } = tasksSlice.actions;
