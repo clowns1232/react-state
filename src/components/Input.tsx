@@ -1,10 +1,7 @@
-import React, { Reducer, useReducer, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
-import { useSelector } from "react-redux";
-import { reduxStoreType } from "../redux/sliceTypes";
 import store, { addTodo } from "../redux/store";
-import { combineReducers } from "redux";
 
 const InsertInput = styled.input`
   width: 100%;

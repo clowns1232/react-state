@@ -1,9 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  createSlice,
-  nanoid,
-} from "@reduxjs/toolkit";
+import { configureStore, createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { TaskType } from "./sliceTypes";
 

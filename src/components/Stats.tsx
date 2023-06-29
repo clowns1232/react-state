@@ -1,6 +1,8 @@
 import React from "react";
 import { Card } from "./Card";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
+import { reduxStoreType } from "../redux/sliceTypes";
 
 const StatContainer = styled.div`
   flex: 1;
@@ -47,11 +49,21 @@ const Container = styled(Card)`
 `;
 
 export const Stats: React.FC = () => {
+  const tasks = useSelector((state: reduxStoreType) => {
+    return state.tasks;
+  });
+
   return (
     <Container>
-      <Stat label="끝난 일감" value="1" />
+      <Stat
+        label="끝난 일감"
+        value={tasks.filter((task) => task.complete === true).length}
+      />
       <Divider />
-      <Stat label="남은 일감" value="3" />
+      <Stat
+        label="남은 일감"
+        value={tasks.filter((task) => task.complete === false).length}
+      />
     </Container>
   );
 };
