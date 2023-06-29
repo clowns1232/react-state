@@ -2,8 +2,6 @@ import { configureStore, createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { TaskType } from "./sliceTypes";
 
-// tasks 초기 상태 값
-
 const tasksSlice = createSlice({
   name: "tasks",
   initialState: [] as TaskType[],
@@ -24,10 +22,22 @@ const tasksSlice = createSlice({
   },
 });
 
+const darkModeSlice = createSlice({
+  name: "darkMode",
+  initialState: true as boolean,
+  reducers: {
+    changeDarkMode: (state) => {
+      return !state;
+    },
+  },
+});
+
 export default configureStore({
   reducer: {
     tasks: tasksSlice.reducer,
+    darkMode: darkModeSlice.reducer,
   },
 });
 
 export const { addTodo, checkTodo } = tasksSlice.actions;
+export const { changeDarkMode } = darkModeSlice.actions;

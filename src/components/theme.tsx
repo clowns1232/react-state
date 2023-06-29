@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
+import { reduxStoreType } from "../redux/sliceTypes";
 
 export const colors = {
   dark: {
@@ -48,8 +50,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   darkMode,
   children,
 }) => {
+  const isDarkMode = useSelector((state: reduxStoreType) => {
+    return state.darkMode;
+  });
   return (
-    <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+    <StyledThemeProvider theme={isDarkMode ? colors.dark : colors.light}>
       {children}
     </StyledThemeProvider>
   );

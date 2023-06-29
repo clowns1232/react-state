@@ -3,7 +3,7 @@ export interface TaskType {
   label: string;
   complete: boolean;
 }
-
 export interface reduxStoreType {
   tasks: [TaskType];
+  darkMode: boolean;
 }

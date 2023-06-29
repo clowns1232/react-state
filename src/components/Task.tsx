@@ -70,7 +70,6 @@ export const Task: React.FC<TaskType> = ({ id, complete, label }) => {
   return (
     <Container
       onClick={() => {
-        // Toggle completed
         store.dispatch(checkTodo(id));
       }}
     >
