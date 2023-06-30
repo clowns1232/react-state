@@ -33,3 +33,4 @@ React에서 많은 프로젝트들은 주로 Redux를 사용을 했습니다.
   - react 이외에서도 사용해야하는 경우
   - redux devtools를 좋아하는 경우
 
+# zustand 사용
