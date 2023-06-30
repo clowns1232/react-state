@@ -4,7 +4,7 @@ React에서 많은 프로젝트들은 주로 Redux를 사용을 했습니다.
 # React의 상태관리 라이브러리 종류
 많이 사용하는 라이브러리는 크게 5가지가 있습니다.
 1. redux
-2. redux-saga
+2. redux-toolkit
 3. zustand
 4. jotai
 5. recoil
