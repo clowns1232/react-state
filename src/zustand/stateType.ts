@@ -4,6 +4,6 @@ export interface TaskType {
   complete: boolean;
 }
 export interface UseTasksType {
-  tasks: Array<TaskType>;
+  tasks: TaskType[];
   addTask: (label: string) => void;
 }
