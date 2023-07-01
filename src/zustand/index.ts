@@ -1,10 +1,13 @@
 import { create } from "zustand";
 import { TaskType, UseTasksType } from "./stateType";
 
-// export const useTasks = create<UseTasksType>((set) => {
-//   return {
-//     tasks: [],
-//     addTask: (tasks: [TaskType]) =>
-//       set((state: TaskType) => ({ tasks: [...tasks, state] })),
-//   };
-// });
+export const useTasks = create<UseTasksType>((set) => {
+  return {
+    tasks: Array<TaskType>,
+    addTask: (label) =>
+      set((state) => {
+        const task = { label: label };
+        return { tasks: [...state.tasks, task] };
+      }),
+  };
+});
