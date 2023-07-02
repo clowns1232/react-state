@@ -3,6 +3,7 @@ import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
+import {  useDarkMode } from "../zustand";
 
 export const colors = {
   dark: {
@@ -48,8 +49,10 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   darkMode,
   children,
 }) => {
+  const { isDarkMode } = useDarkMode((state) => state);
+
   return (
-    <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+    <StyledThemeProvider theme={isDarkMode ? colors.dark : colors.light}>
       {children}
     </StyledThemeProvider>
   );

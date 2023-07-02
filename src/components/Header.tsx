@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Switch } from "./Switch";
+import { useDarkMode } from "../zustand";
 
 const Container = styled.div`
   display: flex;
@@ -11,11 +12,11 @@ const Container = styled.div`
 `;
 
 export const Header: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const { changeDarkMode, isDarkMode } = useDarkMode((state) => state);
 
   return (
     <Container>
-      다크모드 <Switch value={darkMode} onChange={setDarkMode} />
+      다크모드 <Switch value={isDarkMode} onChange={changeDarkMode} />
     </Container>
   );
 };

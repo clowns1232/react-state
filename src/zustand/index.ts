@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { UseTasksType } from "./stateType";
+import { UseDrakModeType, UseTasksType } from "./stateType";
 import { v4 as uuidv4 } from "uuid";
 
 export const useTasks = create<UseTasksType>((set) => {
@@ -24,6 +24,16 @@ export const useTasks = create<UseTasksType>((set) => {
         });
 
         return { tasks: changeTask };
+      }),
+  };
+});
+
+export const useDarkMode = create<UseDrakModeType>((set) => {
+  return {
+    isDarkMode: true,
+    changeDarkMode: () =>
+      set((state) => {
+        return { isDarkMode: !state.isDarkMode };
       }),
   };
 });
