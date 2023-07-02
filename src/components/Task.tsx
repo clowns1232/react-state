@@ -2,6 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
+import { TaskType } from "../zustand/stateType";
+import { useTasks } from "../zustand";
 
 export const TextStyle = css`
   font-size: 17px;
@@ -64,14 +66,15 @@ const Strikethrough = styled.div<{ checked: boolean }>`
     `};
 `;
 
-export const Task: React.FC<{ id: number }> = ({ id }) => {
-  const complete = false;
-  const label = `샘플 데이터 ${id}`;
+export const Task: React.FC<{ task: TaskType }> = ({ task }) => {
+  const complete = task.complete;
+  const label = task.label;
+  const { changeComplete } = useTasks((state) => state);
 
   return (
     <Container
       onClick={() => {
-        // Toggle completed
+        changeComplete(task.id);
       }}
     >
       <Check checked={complete}>

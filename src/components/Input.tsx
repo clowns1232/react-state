@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
+import { useTasks } from "../zustand";
 
 const InsertInput = styled.input`
   width: 100%;
@@ -20,6 +21,7 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
   const [label, setLabel] = useState("");
+  const { addTask } = useTasks((state) => state);
 
   return (
     <TaskContainer>
@@ -33,6 +35,7 @@ export const Input: React.FC = () => {
         }}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
+            addTask(label);
             setLabel("");
           }
         }}

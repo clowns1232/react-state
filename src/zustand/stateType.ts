@@ -6,4 +6,5 @@ export interface TaskType {
 export interface UseTasksType {
   tasks: TaskType[];
   addTask: (label: string) => void;
+  changeComplete: (id: string) => void;
 }

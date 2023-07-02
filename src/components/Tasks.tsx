@@ -1,13 +1,15 @@
 import React from "react";
 import { Task } from "./Task";
+import { useTasks } from "../zustand";
 
 export const Tasks: React.FC = () => {
+  const { tasks } = useTasks((state) => state);
+
   return (
     <div>
-      <Task id={0} />
-      <Task id={1} />
-      <Task id={2} />
-      <Task id={3} />
+      {tasks.map((task) => (
+        <Task task={task} key={task.id} />
+      ))}
     </div>
   );
 };
