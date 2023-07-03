@@ -1,8 +1,10 @@
+import { useAtom } from "jotai";
 import React from "react";
 import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
+import { readWriteIsDarkModeAtom } from "../state";
 
 export const colors = {
   dark: {
@@ -44,12 +46,11 @@ export const GlobalStyles = createGlobalStyle`
 
 type ThemeProviderProps = { darkMode: boolean; children: any };
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({
-  darkMode,
-  children,
-}) => {
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+  const [isDarkMode] = useAtom(readWriteIsDarkModeAtom);
+
   return (
-    <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+    <StyledThemeProvider theme={isDarkMode ? colors.dark : colors.light}>
       {children}
     </StyledThemeProvider>
   );
