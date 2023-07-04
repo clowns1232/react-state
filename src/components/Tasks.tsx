@@ -1,13 +1,15 @@
 import React from "react";
 import { Task } from "./Task";
+import { useAtom } from "jotai";
+import { getTasks } from "../state";
 
 export const Tasks: React.FC = () => {
+  const [tasks] = useAtom(getTasks);
   return (
     <div>
-      <Task id={0} />
-      <Task id={1} />
-      <Task id={2} />
-      <Task id={3} />
+      {tasks.map((task) => {
+        return <Task task={task} key={task.id} />;
+      })}
     </div>
   );
 };

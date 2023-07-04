@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
+import { useAtom } from "jotai";
+import { addTasks } from "../state";
 
 const InsertInput = styled.input`
   width: 100%;
@@ -20,7 +22,7 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
   const [label, setLabel] = useState("");
-
+  const [, setTask] = useAtom(addTasks);
   return (
     <TaskContainer>
       <InsertInput
@@ -34,6 +36,7 @@ export const Input: React.FC = () => {
         onKeyUp={(e) => {
           if (e.key === "Enter") {
             setLabel("");
+            setTask(label);
           }
         }}
       />
