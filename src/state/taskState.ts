@@ -1,17 +1,12 @@
 import { atom } from "jotai";
 import { v4 as uuidv4 } from "uuid";
 
-const isDarkMode = atom<boolean>(true);
-export const readWriteIsDarkModeAtom = atom(
-  (get) => get(isDarkMode),
-  (_get, set) => set(isDarkMode, !_get(isDarkMode))
-);
-
 export interface taskType {
   id: string;
   label: string;
   complete: boolean;
 }
+
 const tasks = atom<taskType[]>([]);
 export const getTasks = atom((get) => get(tasks));
 export const addTasks = atom(null, (get, set, label: string) => {
