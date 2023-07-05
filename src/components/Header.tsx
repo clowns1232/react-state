@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Switch } from "./Switch";
 import { useAtom } from "jotai";
-import { readWriteIsDarkModeAtom } from "../state";
+import { readWriteIsDarkModeAtom } from "../state/isDarkModeState";
 
 const Container = styled.div`
   display: flex;

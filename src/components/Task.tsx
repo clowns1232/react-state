@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
-import { completeChangeTask, taskType } from "../state";
+import { completeChangeTask, taskType } from "../state/taskState";
 import { useAtom } from "jotai";
 
 export const TextStyle = css`

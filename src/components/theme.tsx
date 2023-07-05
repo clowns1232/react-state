@@ -4,7 +4,7 @@ import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
-import { readWriteIsDarkModeAtom } from "../state";
+import { readWriteIsDarkModeAtom } from "../state/isDarkModeState";
 
 export const colors = {
   dark: {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
 import { useAtom } from "jotai";
-import { addTasks } from "../state";
+import { addTasks } from "../state/taskState";
 
 const InsertInput = styled.input`
   width: 100%;

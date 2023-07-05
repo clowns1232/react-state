@@ -1,7 +1,7 @@
 import React from "react";
 import { Task } from "./Task";
 import { useAtom } from "jotai";
-import { getTasks } from "../state";
+import { getTasks } from "../state/taskState";
 
 export const Tasks: React.FC = () => {
   const [tasks] = useAtom(getTasks);
