@@ -1,0 +1,9 @@
+{
+  "tasks": [
+    { "id": "1", "label": "sample1", "complete": false },
+    { "id": "2", "label": "sample2", "complete": false }
+  ],
+  "isDarkMode": {
+    "isDarkMode": true
+  }
+}
