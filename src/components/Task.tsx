@@ -2,6 +2,9 @@ import React from "react";
 import styled, { css } from "styled-components";
 import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
+import { taskType } from "../type/tasksType";
+import { useMutation, useQueryClient } from "react-query";
+import { changeServerTasks } from "../api/api";
 
 export const TextStyle = css`
   font-size: 17px;
@@ -64,14 +67,22 @@ const Strikethrough = styled.div<{ checked: boolean }>`
     `};
 `;
 
-export const Task: React.FC<{ id: number }> = ({ id }) => {
-  const complete = false;
-  const label = `샘플 데이터 ${id}`;
+export const Task: React.FC<{ task: taskType }> = ({ task }) => {
+  const complete = task.complete;
+  const label = `${task.label}`;
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation(
+    () => changeServerTasks(task.id, task.complete),
+    {
+      onSuccess: () => queryClient.invalidateQueries(["tasks"]),
+    }
+  );
 
   return (
     <Container
       onClick={() => {
         // Toggle completed
+        mutateAsync();
       }}
     >
       <Check checked={complete}>

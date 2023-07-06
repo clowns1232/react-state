@@ -1,13 +1,26 @@
 import React from "react";
 import { Task } from "./Task";
+import { getServerTasks } from "../api/api";
+import { useQuery } from "react-query";
+import { taskType } from "../type/tasksType";
 
 export const Tasks: React.FC = () => {
+  const { data } = useQuery<taskType[]>(
+    "tasks",
+    () => {
+      return getServerTasks();
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0, // 실패시 재호출 몇번 할지
+    }
+  );
+
   return (
     <div>
-      <Task id={0} />
-      <Task id={1} />
-      <Task id={2} />
-      <Task id={3} />
+      {data?.map((task) => {
+        return <Task task={task} key={task.id} />;
+      })}
     </div>
   );
 };

@@ -3,6 +3,9 @@ import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
+import { useQuery } from "react-query";
+import { taskType } from "../type/tasksType";
+import { getServerTasks } from "../api/api";
 
 export const colors = {
   dark: {
@@ -48,8 +51,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   darkMode,
   children,
 }) => {
+  const { data } = useQuery<{ isDarkMode: boolean }>(
+    "isDarkMode",
+    () => {
+      return getServerTasks();
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0, // 실패시 재호출 몇번 할지
+    }
+  );
+
   return (
-    <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+    <StyledThemeProvider theme={data?.isDarkMode ? colors.dark : colors.light}>
       {children}
     </StyledThemeProvider>
   );

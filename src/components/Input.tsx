@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
+import { postServerTasks } from "../api/api";
+import { useMutation, useQueryClient } from "react-query";
 
 const InsertInput = styled.input`
   width: 100%;
@@ -20,7 +22,10 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
   const [label, setLabel] = useState("");
-
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation(postServerTasks, {
+    onSuccess: () => queryClient.invalidateQueries(["tasks"]),
+  });
   return (
     <TaskContainer>
       <InsertInput
@@ -33,6 +38,8 @@ export const Input: React.FC = () => {
         }}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
+            if (label.replace(/ +/g, "") === "") return;
+            mutateAsync(label);
             setLabel("");
           }
         }}

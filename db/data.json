@@ -1,9 +1,22 @@
 {
   "tasks": [
-    { "id": "1", "label": "sample1", "complete": false },
-    { "id": "2", "label": "sample2", "complete": false }
+    {
+      "label": "test1",
+      "id": "251f9c81-069e-460e-94ba-58cbf6937b69",
+      "complete": false
+    },
+    {
+      "label": "qwe",
+      "id": "7548ce6c-3e5a-4dac-b0c6-7683507bb76c",
+      "complete": true
+    },
+    {
+      "label": "asda",
+      "id": "aad6578a-5164-4024-9a93-14b200ca217d",
+      "complete": false
+    }
   ],
   "isDarkMode": {
-    "isDarkMode": true
+    "isDarkMode": false
   }
 }

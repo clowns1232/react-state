@@ -1,6 +1,9 @@
 import React from "react";
 import { Card } from "./Card";
 import styled from "styled-components";
+import { taskType } from "../type/tasksType";
+import { useQuery } from "react-query";
+import { getServerTasks } from "../api/api";
 
 const StatContainer = styled.div`
   flex: 1;
@@ -47,11 +50,28 @@ const Container = styled(Card)`
 `;
 
 export const Stats: React.FC = () => {
+  const { data } = useQuery<taskType[]>(
+    "tasks",
+    () => {
+      return getServerTasks();
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0, // 실패시 재호출 몇번 할지
+    }
+  );
+
   return (
     <Container>
-      <Stat label="끝난 일감" value="1" />
+      <Stat
+        label="끝난 일감"
+        value={data ? data.filter((task) => task.complete).length : 0}
+      />
       <Divider />
-      <Stat label="남은 일감" value="3" />
+      <Stat
+        label="남은 일감"
+        value={data ? data?.filter((task) => !task.complete).length : 0}
+      />
     </Container>
   );
 };
