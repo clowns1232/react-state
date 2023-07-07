@@ -3,6 +3,8 @@ import styled, {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
+import useSWR from "swr";
+import { getServerDarkMode } from "../api/api";
 
 export const colors = {
   dark: {
@@ -48,8 +50,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   darkMode,
   children,
 }) => {
+  const { data: isDarkMode } = useSWR<boolean>(
+    "/isDarkMode",
+    getServerDarkMode
+  );
+
   return (
-    <StyledThemeProvider theme={darkMode ? colors.dark : colors.light}>
+    <StyledThemeProvider theme={isDarkMode ? colors.dark : colors.light}>
       {children}
     </StyledThemeProvider>
   );

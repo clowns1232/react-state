@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Switch } from "./Switch";
+import { getServerDarkMode, putServerDarkMode } from "../api/api";
+import useSWR from "swr";
+import useSWRMutation from "swr/mutation";
 
 const Container = styled.div`
   display: flex;
@@ -11,11 +14,20 @@ const Container = styled.div`
 `;
 
 export const Header: React.FC = () => {
-  const [darkMode, setDarkMode] = useState(true);
-
+  const { data: isDarkMode } = useSWR<boolean>(
+    "/isDarkMode",
+    getServerDarkMode
+  );
+  const { trigger } = useSWRMutation("/isDarkMode", () => {
+    putServerDarkMode(isDarkMode);
+  });
   return (
     <Container>
-      다크모드 <Switch value={darkMode} onChange={setDarkMode} />
+      다크모드{" "}
+      <Switch
+        value={isDarkMode ? isDarkMode : false}
+        onChange={() => trigger()}
+      />
     </Container>
   );
 };

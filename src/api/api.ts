@@ -20,7 +20,7 @@ export const changeServerTasks = (id: string, complete: boolean) =>
   });
 
 export const getServerDarkMode = () =>
-  api.get(`isDarkMode`).then((res) => res.data);
+  api.get(`isDarkMode`).then((res) => res.data.isDarkMode);
 export const putServerDarkMode = (thisDarkMode?: boolean) =>
   api.put("isDarkMode", {
     isDarkMode: !thisDarkMode,
