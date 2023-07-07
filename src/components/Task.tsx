@@ -4,7 +4,6 @@ import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
 import { TaskType } from "../tpye/taskType";
 import useSWRMutation from "swr/mutation";
-import useSWR from "swr";
 import { changeServerTasks } from "../api/api";
 
 export const TextStyle = css`

@@ -1,6 +1,9 @@
 import React from "react";
 import { Card } from "./Card";
 import styled from "styled-components";
+import useSWR from "swr";
+import { getServerTasks } from "../api/api";
+import { TaskType } from "../tpye/taskType";
 
 const StatContainer = styled.div`
   flex: 1;
@@ -47,11 +50,18 @@ const Container = styled(Card)`
 `;
 
 export const Stats: React.FC = () => {
+  const { data: tasks } = useSWR<TaskType[]>("/tasks", getServerTasks);
   return (
     <Container>
-      <Stat label="끝난 일감" value="1" />
+      <Stat
+        label="끝난 일감"
+        value={tasks ? tasks.filter((task) => task.complete).length : 0}
+      />
       <Divider />
-      <Stat label="남은 일감" value="3" />
+      <Stat
+        label="남은 일감"
+        value={tasks ? tasks.filter((task) => !task.complete).length : 0}
+      />
     </Container>
   );
 };

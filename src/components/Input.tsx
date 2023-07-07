@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Container as TaskContainer, TextStyle as TaskTextStyle } from "./Task";
+import useSWRMutation from "swr/mutation";
+import { postServerTasks } from "../api/api";
 
 const InsertInput = styled.input`
   width: 100%;
@@ -20,6 +22,9 @@ const InsertInput = styled.input`
 
 export const Input: React.FC = () => {
   const [label, setLabel] = useState("");
+  const { trigger } = useSWRMutation("/tasks", () => {
+    postServerTasks(label);
+  });
 
   return (
     <TaskContainer>
@@ -33,6 +38,7 @@ export const Input: React.FC = () => {
         }}
         onKeyUp={(e) => {
           if (e.key === "Enter") {
+            trigger();
             setLabel("");
           }
         }}
