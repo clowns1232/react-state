@@ -2,6 +2,10 @@ import React from "react";
 import styled, { css } from "styled-components";
 import checkIconSvg from "./check.svg";
 import { Card } from "./Card";
+import { TaskType } from "../tpye/taskType";
+import useSWRMutation from "swr/mutation";
+import useSWR from "swr";
+import { changeServerTasks } from "../api/api";
 
 export const TextStyle = css`
   font-size: 17px;
@@ -64,14 +68,18 @@ const Strikethrough = styled.div<{ checked: boolean }>`
     `};
 `;
 
-export const Task: React.FC<{ id: number }> = ({ id }) => {
-  const complete = false;
-  const label = `샘플 데이터 ${id}`;
+export const Task: React.FC<{ task: TaskType }> = ({ task }) => {
+  const complete = task.complete;
+  const label = `${task.label}`;
+  const { trigger } = useSWRMutation("/tasks", () => {
+    changeServerTasks(task.id, task.complete);
+  });
 
   return (
     <Container
       onClick={() => {
         // Toggle completed
+        trigger();
       }}
     >
       <Check checked={complete}>
